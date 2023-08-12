@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Alquiler_Autos.AccesoDatos\Alquiler_Autos.AccesoDatos.csproj" />
+    <ProjectReference Include="..\Alquiler_Autos.Entidades\Alquiler_Autos.Entidades.csproj" />
+  </ItemGroup>
+
+</Project>
