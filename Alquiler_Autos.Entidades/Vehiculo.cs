@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace Alquiler_Autos.Entidades
 {
-    internal class Vehiculo
+    public class Vehiculo
     {
+        public int Id { get; set; }
+        public string Marcar { get; set; }
+        public string Modelo { get; set; }
+        public int Anio { get; set; }
+        public int CantidadPasajeros { get; set; }
+        public int IdTipoCombustible { get; set; }
+        public int CantidadPuertas { get; set; }
+        public int CapacidadCombustible { get; set; }
+        public double PrecioAlquilerPorDia { get; set; }
+        public int CapacidadVault { get; set; }
+        
+
     }
 }
