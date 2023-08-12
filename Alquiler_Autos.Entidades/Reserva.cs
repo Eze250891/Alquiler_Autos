@@ -9,11 +9,11 @@ namespace Alquiler_Autos.Entidades
     public class Reserva
     {
         public int Id { get; set; }
+        public int IdVehiculo { get; set; }
+        public int IdUsuario { get; set; }
         public DateTime FechaEntrada { get; set; }
         public DateTime FechaSalida { get; set; }
 
-        public int IdVehiculo { get; set; }
-        public int IdUsuario { get; set; }
         public double Total { get; set; }
 
 
