@@ -17,8 +17,7 @@ namespace Alquiler_Autos.Entidades
         public int CantidadPuertas { get; set; }
         public int CapacidadCombustible { get; set; }
         public double PrecioAlquilerPorDia { get; set; }
-        public int CapacidadBault { get; set; }
-        
+        public int? CapacidadBault { get; set; }
 
     }
 }
