@@ -10,5 +10,7 @@ namespace Alquiler_Autos.Entidades
     {
         public int Id { get; set; }
         public string Descripcion { get; set; }
+
+        public virtual List<Vehiculo> VehiculosList { get; set; } = new List<Vehiculo>();
     }
 }

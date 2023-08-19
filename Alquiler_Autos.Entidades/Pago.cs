@@ -12,5 +12,10 @@ namespace Alquiler_Autos.Entidades
         public int IdReserva { get; set; }
         public int IdFormaDePago { get; set; }
         public double Monto { get; set; }
+
+        public virtual Reserva Reserva { get; set; }
+        public virtual FormaDePago FormaDePago { get; set;}
+
+        
     }
 }

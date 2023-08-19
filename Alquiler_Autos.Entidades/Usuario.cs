@@ -13,5 +13,9 @@
         public string CategoriaCarnet { get; set; }
         public DateTime FechaVencimientoCarnet { get; set; }
 
+        public virtual List<Reserva> Reservas { get; set; } = new List<Reserva>();
+
+
+
     }
 }

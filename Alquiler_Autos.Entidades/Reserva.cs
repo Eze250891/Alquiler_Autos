@@ -15,6 +15,10 @@ namespace Alquiler_Autos.Entidades
         public DateTime FechaSalida { get; set; }
         public double Total { get; set; }
 
+        public virtual Vehiculo Vehiculo { get; set; }
+        public virtual Usuario Usuario { get; set; }
+
+        public virtual List<Pago> Pagos { get; set; } = new List<Pago>();
 
     }
 }

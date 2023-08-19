@@ -4,6 +4,7 @@ using Alquiler_Autos.Controlador;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alquiler_Autos.AccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230819162217_RelacionReservaVehiculoUsuario")]
+    partial class RelacionReservaVehiculoUsuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,8 +62,6 @@ namespace Alquiler_Autos.AccesoDatos.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdFormaDePago");
-
-                    b.HasIndex("IdReserva");
 
                     b.ToTable("Pagos");
                 });
@@ -215,15 +216,7 @@ namespace Alquiler_Autos.AccesoDatos.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Alquiler_Autos.Entidades.Reserva", "Reserva")
-                        .WithMany("Pagos")
-                        .HasForeignKey("IdReserva")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("FormaDePago");
-
-                    b.Navigation("Reserva");
                 });
 
             modelBuilder.Entity("Alquiler_Autos.Entidades.Reserva", b =>
@@ -257,11 +250,6 @@ namespace Alquiler_Autos.AccesoDatos.Migrations
                 });
 
             modelBuilder.Entity("Alquiler_Autos.Entidades.FormaDePago", b =>
-                {
-                    b.Navigation("Pagos");
-                });
-
-            modelBuilder.Entity("Alquiler_Autos.Entidades.Reserva", b =>
                 {
                     b.Navigation("Pagos");
                 });

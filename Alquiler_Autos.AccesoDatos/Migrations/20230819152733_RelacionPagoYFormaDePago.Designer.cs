@@ -4,6 +4,7 @@ using Alquiler_Autos.Controlador;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alquiler_Autos.AccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230819152733_RelacionPagoYFormaDePago")]
+    partial class RelacionPagoYFormaDePago
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,8 +63,6 @@ namespace Alquiler_Autos.AccesoDatos.Migrations
 
                     b.HasIndex("IdFormaDePago");
 
-                    b.HasIndex("IdReserva");
-
                     b.ToTable("Pagos");
                 });
 
@@ -89,10 +90,6 @@ namespace Alquiler_Autos.AccesoDatos.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdUsuario");
-
-                    b.HasIndex("IdVehiculo");
 
                     b.ToTable("Reservas");
                 });
@@ -202,8 +199,6 @@ namespace Alquiler_Autos.AccesoDatos.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdTipoCombustible");
-
                     b.ToTable("Vehiculos");
                 });
 
@@ -215,70 +210,12 @@ namespace Alquiler_Autos.AccesoDatos.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Alquiler_Autos.Entidades.Reserva", "Reserva")
-                        .WithMany("Pagos")
-                        .HasForeignKey("IdReserva")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("FormaDePago");
-
-                    b.Navigation("Reserva");
-                });
-
-            modelBuilder.Entity("Alquiler_Autos.Entidades.Reserva", b =>
-                {
-                    b.HasOne("Alquiler_Autos.Entidades.Usuario", "Usuario")
-                        .WithMany("Reservas")
-                        .HasForeignKey("IdUsuario")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Alquiler_Autos.Entidades.Vehiculo", "Vehiculo")
-                        .WithMany("Reservas")
-                        .HasForeignKey("IdVehiculo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
-
-                    b.Navigation("Vehiculo");
-                });
-
-            modelBuilder.Entity("Alquiler_Autos.Entidades.Vehiculo", b =>
-                {
-                    b.HasOne("Alquiler_Autos.Entidades.TipoCombustible", "TiposCombustible")
-                        .WithMany("VehiculosList")
-                        .HasForeignKey("IdTipoCombustible")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TiposCombustible");
                 });
 
             modelBuilder.Entity("Alquiler_Autos.Entidades.FormaDePago", b =>
                 {
                     b.Navigation("Pagos");
-                });
-
-            modelBuilder.Entity("Alquiler_Autos.Entidades.Reserva", b =>
-                {
-                    b.Navigation("Pagos");
-                });
-
-            modelBuilder.Entity("Alquiler_Autos.Entidades.TipoCombustible", b =>
-                {
-                    b.Navigation("VehiculosList");
-                });
-
-            modelBuilder.Entity("Alquiler_Autos.Entidades.Usuario", b =>
-                {
-                    b.Navigation("Reservas");
-                });
-
-            modelBuilder.Entity("Alquiler_Autos.Entidades.Vehiculo", b =>
-                {
-                    b.Navigation("Reservas");
                 });
 #pragma warning restore 612, 618
         }
