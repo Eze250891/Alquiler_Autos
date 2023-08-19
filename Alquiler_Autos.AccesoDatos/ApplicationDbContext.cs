@@ -13,8 +13,10 @@ namespace Alquiler_Autos.Controlador
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Vehiculo> Vehiculos { get; set; }
         public DbSet<Reserva> Reservas { get; set; }
-
         public DbSet<Pago> Pagos { get; set; }
+
+        public DbSet<FormaDePago> FormaDePagos { get; set; }
+        public DbSet<TipoCombustible> tipoCombustibles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -139,6 +141,25 @@ namespace Alquiler_Autos.Controlador
             modelBuilder.Entity<Pago>()
                 .Property (x=>x.Monto)
                 .IsRequired();
+
+            //----FormaDePago----
+
+            modelBuilder.Entity<FormaDePago>()
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<FormaDePago>()
+                .Property(x => x.Descripcion)
+                .IsRequired();
+
+            //-----TipoDeCombustible----
+
+            modelBuilder.Entity<TipoCombustible>()
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<TipoCombustible>()
+                .Property(x => x.Descripcion)
+                .IsRequired();
+
 
         }
     }
