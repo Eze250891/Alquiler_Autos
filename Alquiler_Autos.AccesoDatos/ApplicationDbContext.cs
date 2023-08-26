@@ -141,9 +141,6 @@ namespace Alquiler_Autos.Controlador
                         .HasForeignKey(x => x.IdVehiculo);
                         
 
-            
-
-
             //-----Pagos----
 
             modelBuilder.Entity<Pago>()

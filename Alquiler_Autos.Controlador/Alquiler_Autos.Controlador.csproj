@@ -11,4 +11,12 @@
     <ProjectReference Include="..\Alquiler_Autos.Entidades\Alquiler_Autos.Entidades.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\Pago\" />
+    <Folder Include="DTOs\Usuario\" />
+    <Folder Include="DTOs\TipoDeCombustible\" />
+    <Folder Include="DTOs\Vehiculo\" />
+    <Folder Include="DTOs\Reserva\" />
+  </ItemGroup>
+
 </Project>
