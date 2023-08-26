@@ -36,7 +36,7 @@ namespace Alquiler_Autos.AccesoDatos.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FormaDePagos");
+                    b.ToTable("FormaDePagos", (string)null);
                 });
 
             modelBuilder.Entity("Alquiler_Autos.Entidades.Pago", b =>
@@ -62,7 +62,7 @@ namespace Alquiler_Autos.AccesoDatos.Migrations
 
                     b.HasIndex("IdReserva");
 
-                    b.ToTable("Pagos");
+                    b.ToTable("Pagos", (string)null);
                 });
 
             modelBuilder.Entity("Alquiler_Autos.Entidades.Reserva", b =>
@@ -94,7 +94,7 @@ namespace Alquiler_Autos.AccesoDatos.Migrations
 
                     b.HasIndex("IdVehiculo");
 
-                    b.ToTable("Reservas");
+                    b.ToTable("Reservas", (string)null);
                 });
 
             modelBuilder.Entity("Alquiler_Autos.Entidades.TipoCombustible", b =>
@@ -111,7 +111,7 @@ namespace Alquiler_Autos.AccesoDatos.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tipoCombustibles");
+                    b.ToTable("Vehiculo", (string)null);
                 });
 
             modelBuilder.Entity("Alquiler_Autos.Entidades.Usuario", b =>
@@ -160,7 +160,7 @@ namespace Alquiler_Autos.AccesoDatos.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
                 });
 
             modelBuilder.Entity("Alquiler_Autos.Entidades.Vehiculo", b =>
@@ -204,7 +204,7 @@ namespace Alquiler_Autos.AccesoDatos.Migrations
 
                     b.HasIndex("IdTipoCombustible");
 
-                    b.ToTable("Vehiculos");
+                    b.ToTable("Vehiculos", (string)null);
                 });
 
             modelBuilder.Entity("Alquiler_Autos.Entidades.Pago", b =>

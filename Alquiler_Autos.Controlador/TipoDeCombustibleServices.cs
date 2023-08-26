@@ -19,29 +19,28 @@ namespace Alquiler_Autos.Controlador
             _context = context;
         }
 
-        public async Task<List<TipoDeCombustibleDetalleDto>> ObtenerTodos()
+        public async Task<List<TipodeCombustibleDetalleDto>> ObtenerTodos()
         {
-            var tipoDeCombustibles = await _context.tipoCombustibles.Select(c => new TipoDeCombustibleDetalleDto
+            var tipoDeCombustibles = await _context.tipoCombustibles.Select(c => new TipodeCombustibleDetalleDto
             {
                 Id = c.Id,
-                Descripcion = c.Descripcion
+                Descripcion = c.Descripcion,
             }).ToListAsync();
-
             return tipoDeCombustibles;
         }
 
-        public async Task<TipoDeCombustibleDetalleDto> ObtenerPorId(int id)
+        public async Task<TipodeCombustibleDetalleDto> ObtenerPorId(int id)
         {
             var tipoDecombustible = await BuscarPorId(id);
 
-            return new TipoDeCombustibleDetalleDto
+            return new TipodeCombustibleDetalleDto
             {
                 Id = tipoDecombustible.Id,
                 Descripcion = tipoDecombustible.Descripcion,
             };
         }
 
-        public async Task<TipoDeCombustibleDetalleDto> Crear(TipoDeCombustibleCrearDto dto)
+        public async Task<TipodeCombustibleDetalleDto> Crear(TipoDeCombustibleCrearDto dto)
         {
             var combustible = new TipoCombustible
             {
@@ -56,7 +55,7 @@ namespace Alquiler_Autos.Controlador
             await _context.AddAsync(combustible);
             await _context.SaveChangesAsync();
 
-            return new TipoDeCombustibleDetalleDto
+            return new TipodeCombustibleDetalleDto
             {
                 Id = combustible.Id,
                 Descripcion = combustible.Descripcion,
@@ -64,7 +63,7 @@ namespace Alquiler_Autos.Controlador
 
         }
 
-        public async Task<TipoDeCombustibleDetalleDto> Actualizar(int id, TipoDeCombustibleCrearDto dto)
+        public async Task<TipodeCombustibleDetalleDto> Actualizar(int id, TipoDeCombustibleCrearDto dto)
         {
             var combustible = await BuscarPorId(id);
 
@@ -81,20 +80,20 @@ namespace Alquiler_Autos.Controlador
             _context.Update(combustible);
             await _context.SaveChangesAsync();
 
-            return new TipoDeCombustibleDetalleDto
+            return new TipodeCombustibleDetalleDto
             {
                 Id = combustible.Id,
                 Descripcion = combustible.Descripcion
             };
         }
 
-        public async Task<TipoDeCombustibleDetalleDto> Remover(int id)
+        public async Task<TipodeCombustibleDetalleDto> Remover(int id)
         {
             var combustible = await BuscarPorId(id);
             _context.Remove(combustible);
             await _context.SaveChangesAsync();
 
-            return new TipoDeCombustibleDetalleDto
+            return new TipodeCombustibleDetalleDto
             {
                 Id = combustible.Id,
                 Descripcion = combustible.Descripcion,

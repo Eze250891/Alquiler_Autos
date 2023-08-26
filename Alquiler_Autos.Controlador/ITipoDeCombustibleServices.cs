@@ -4,10 +4,10 @@ namespace Alquiler_Autos.Controlador
 {
     public interface ITipoDeCombustibleServices
     {
-        Task<TipoDeCombustibleDetalleDto> Actualizar(int id, TipoDeCombustibleCrearDto dto);
-        Task<TipoDeCombustibleDetalleDto> Crear(TipoDeCombustibleCrearDto dto);
-        Task<TipoDeCombustibleDetalleDto> ObtenerPorId(int id);
-        Task<List<TipoDeCombustibleDetalleDto>> ObtenerTodos();
-        Task<TipoDeCombustibleDetalleDto> Remover(int id);
+        Task<TipodeCombustibleDetalleDto> Actualizar(int id, TipoDeCombustibleCrearDto dto);
+        Task<TipodeCombustibleDetalleDto> Crear(TipoDeCombustibleCrearDto dto);
+        Task<TipodeCombustibleDetalleDto> ObtenerPorId(int id);
+        Task<List<TipodeCombustibleDetalleDto>> ObtenerTodos();
+        Task<TipodeCombustibleDetalleDto> Remover(int id);
     }
 }

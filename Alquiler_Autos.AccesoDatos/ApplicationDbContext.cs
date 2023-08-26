@@ -102,6 +102,10 @@ namespace Alquiler_Autos.Controlador
             modelBuilder.Entity<Vehiculo>()
                         .Property(x => x.CapacidadBault);
 
+            //modelBuilder.Entity<Vehiculo>()
+            //            .Property(x => x.Kms)
+            //            .IsRequired();
+
             modelBuilder.Entity<Vehiculo>()
                         .HasOne(c => c.TiposCombustible)
                         .WithMany(t => t.VehiculosList)

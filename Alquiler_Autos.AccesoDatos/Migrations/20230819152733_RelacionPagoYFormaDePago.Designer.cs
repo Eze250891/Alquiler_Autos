@@ -108,7 +108,7 @@ namespace Alquiler_Autos.AccesoDatos.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tipoCombustibles");
+                    b.ToTable("Vehiculo");
                 });
 
             modelBuilder.Entity("Alquiler_Autos.Entidades.Usuario", b =>

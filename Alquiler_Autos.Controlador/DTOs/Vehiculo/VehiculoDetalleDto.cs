@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alquiler_Autos.Controlador.DTOs.TipoDeCombustible
+namespace Alquiler_Autos.Controlador.DTOs.Vehiculo
 {
-    public class TipodeCombustibleDetalleDto : TipoDeCombustibleCrearDto
+    public class VehiculoDetalleDto : VehiculoCrearDto
     {
         public int Id { get; set; }
     }
