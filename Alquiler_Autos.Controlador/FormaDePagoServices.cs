@@ -31,7 +31,7 @@ namespace Alquiler_Autos.Controlador
 
         public async Task<FormaDePagoDetalleDto> ObtenerPorId(int id)
         {
-            FormaDePago? FormaDePago = await BuscarPorId(id);
+            var FormaDePago = await BuscarPorId(id);
 
             return new FormaDePagoDetalleDto
             {
