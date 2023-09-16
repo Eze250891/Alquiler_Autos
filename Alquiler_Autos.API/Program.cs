@@ -29,7 +29,17 @@ namespace Alquiler_Autos.API
             builder.Services.AddScoped<IUsuarioServices, UsuarioServices>();
             builder.Services.AddScoped<IReservaServices, ReservaServices>();
             builder.Services.AddScoped<IPagoServices, PagoServices>();
-
+            //-----------------------------------------------
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("NuevaPolitica", app =>
+                {
+                    app.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -38,7 +48,7 @@ namespace Alquiler_Autos.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseCors("NuevaPolitica");   
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

@@ -12,6 +12,7 @@ namespace Alquiler_Autos.API.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioServices _services;
+        //private readonly string _MyCors = "MyCors";
 
         public UsuarioController(IUsuarioServices services)
         {
