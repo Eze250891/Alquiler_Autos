@@ -47,6 +47,8 @@ namespace Alquiler_Autos.Controlador
 
         public async Task<PagoDetalleDto> Crear(PagoCrearDto dto)
         {
+            var reserva = await _context.Reservas.FindAsync(dto.IdReserva);
+
             var pago = new Pago
             {
                 IdReserva = dto.IdReserva,
@@ -54,21 +56,8 @@ namespace Alquiler_Autos.Controlador
                 Monto = dto.Monto,
             };
 
-            //var reservaRepetido = await _context.Pagos.AnyAsync(x => x.IdReserva == dto.IdReserva);
-            //if (reservaRepetido)
-            //{
-            //    throw new Exception($"Ya existe una reserva para ese id {dto.IdReserva}");
-            //}
-
-            //var formaDePagoRepetido = await _context.Pagos.AnyAsync(x => x.IdFormaDePago == dto.IdFormaDePago);
-            //if (formaDePagoRepetido)
-            //{
-            //    throw new Exception($"Ya existe una reserva con ese vehiculo {dto.IdVehiculo}");
-            //}
-
-
             await _context.AddAsync(pago);
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();
 
             return new PagoDetalleDto
             {

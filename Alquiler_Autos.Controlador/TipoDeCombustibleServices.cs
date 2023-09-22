@@ -100,7 +100,7 @@ namespace Alquiler_Autos.Controlador
             };
         }
 
-        private async Task<TipoCombustible?> BuscarPorId(int id)
+        private async Task<TipoCombustible> BuscarPorId(int id)
         {
             var combustible = await _context.tipoCombustibles.FindAsync(id);
 

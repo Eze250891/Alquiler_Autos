@@ -9,5 +9,7 @@ namespace Alquiler_Autos.Controlador.DTOs.Reserva
     public class ReservaDetalleDto : ReservaCrearDto
     {
         public int Id { get; set; }
+
+        public double Total { get; set; }
     }
 }

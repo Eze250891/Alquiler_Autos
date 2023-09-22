@@ -60,6 +60,19 @@ namespace Alquiler_Autos.Controlador
 
         public async Task<UsuarioDetalleDto> Crear(UsuarioCrearDto dto)
         {
+            var dniRepetido = await _context.Usuarios.AnyAsync(x => x.Dni == dto.Dni);
+            if (dniRepetido)
+            {
+                throw new Exception($"Ya existe un usuario con ese dni {dto.Dni}");
+            }
+
+            var emailRepetido = await _context.Usuarios.AnyAsync(x => x.Email == dto.Email);
+            if (emailRepetido)
+            {
+                throw new Exception($"Ya existe ese {dto.Email}");
+            }
+
+
             var usuario = new Usuario
             {
                 Nombre = dto.Nombre,
@@ -73,23 +86,7 @@ namespace Alquiler_Autos.Controlador
                 FechaVencimientoCarnet = dto.FechaVencimientoCarnet
             };
 
-            var dniRepetido = await _context.Usuarios.AnyAsync(x => x.Dni == dto.Dni);
-            if (dniRepetido)
-            {
-                throw new Exception($"Ya existe un usuario con ese dni {dto.Dni}");
-            }
-
-            var emailRepetido = await _context.Usuarios.AnyAsync(x => x.Email == dto.Email);
-            if (emailRepetido)
-            {
-                throw new Exception($"Ya existe ese {dto.Email}");
-            }
-
-            var telefonoRepetido = await _context.Usuarios.AnyAsync(x => x.Telefono == dto.Telefono);
-            if (telefonoRepetido)
-            {
-                throw new Exception($"Ya existe ese numero de telefono {dto.Telefono}");
-            }
+           
             await _context.AddAsync(usuario);
             await _context.SaveChangesAsync();
 
@@ -111,6 +108,24 @@ namespace Alquiler_Autos.Controlador
 
         public async Task<UsuarioDetalleDto> Actualizar(int id, UsuarioCrearDto dto)
         {
+            var dniRepetido = await _context.Usuarios.AnyAsync(x => x.Dni == dto.Dni && id != x.Id);
+            if (dniRepetido)
+            {
+                throw new Exception($"Ya existe un usuario con ese dni {dto.Dni}");
+            }
+
+            var emailRepetido = await _context.Usuarios.AnyAsync(x => x.Email == dto.Email);
+            if (emailRepetido)
+            {
+                throw new Exception($"Ya existe ese {dto.Email}");
+            }
+
+            var telefonoRepetido = await _context.Usuarios.AnyAsync(x => x.Telefono == dto.Telefono);
+            if (telefonoRepetido)
+            {
+                throw new Exception($"Ya existe ese numero de telefono {dto.Telefono}");
+            }
+
             var usuario = await BuscarPorId(id);
 
             usuario.Nombre = dto.Nombre;
@@ -163,7 +178,7 @@ namespace Alquiler_Autos.Controlador
         }
 
 
-        private async Task<Usuario?> BuscarPorId(int id)
+        private async Task<Usuario> BuscarPorId(int id)
         {
             var usuario = await _context.Usuarios.FindAsync(id);
 

@@ -12,6 +12,5 @@ namespace Alquiler_Autos.Controlador.DTOs.Reserva
         public int IdUsuario { get; set; }
         public DateTime FechaEntrada { get; set; }
         public DateTime FechaSalida { get; set; }
-        public double Total { get; set; }
     }
 }

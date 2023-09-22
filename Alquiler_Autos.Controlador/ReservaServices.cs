@@ -51,28 +51,71 @@ namespace Alquiler_Autos.Controlador
 
         public async Task<ReservaDetalleDto> Crear(ReservaCrearDto dto)
         {
+            //validar que el usuario exista 
+
+            var usuarioExistente = await _context.Usuarios.AnyAsync(x => x.Id == dto.IdUsuario);
+
+            if (!usuarioExistente)
+            {
+                throw new Exception($"El usuario con el id {dto.IdUsuario} ya existe");
+            }
+
+            //que el vehiculo exista
+
+            var vehiculoExistente = await _context.Vehiculos.AnyAsync(v => v.Id == dto.IdVehiculo);
+
+            if (!vehiculoExistente)
+            {
+                throw new Exception($"El vehiculo con el id {dto.IdVehiculo} ya existe Capo");
+            }
+
+            //validar disponibilidad en la fecha de reserva, mayor a fecha de salida y menor a la de entrada
+
+            var fechaDisponible = await _context.Reservas.AnyAsync(x => x.IdVehiculo == dto.IdVehiculo &&
+                                                                       (dto.FechaEntrada >= x.FechaEntrada && dto.FechaEntrada <= x.FechaSalida ||
+                                                                       dto.FechaSalida >= x.FechaEntrada && dto.FechaSalida <= x.FechaSalida));
+            if (!fechaDisponible)
+            {
+                throw new Exception($"La fecha elegida no esta disponible");
+            }
+
+            //validar que el usuario no tenga reserva dentro de la fecha de reserva
+
+            var usuarioReserva = await _context.Reservas.AnyAsync(x => x.IdUsuario == dto.IdUsuario &&
+                                                                       (dto.FechaEntrada >= x.FechaEntrada && dto.FechaEntrada <= x.FechaSalida ||
+                                                                       dto.FechaSalida >= x.FechaEntrada && dto.FechaSalida <= x.FechaSalida));
+
+            if (!usuarioReserva)
+            {
+                throw new Exception($"El usuario ya tiene una reserva en esa fecha");
+            }
+
+
+            //calcular total de la reserva, teniendo en cuenta dias y valor del vehiculo
+
+            var vehiculo = await _context.Vehiculos.FindAsync(dto.IdVehiculo);
+
+            var resultado = dto.FechaSalida - dto.FechaEntrada;
+
+            var total = resultado.Days * vehiculo.PrecioAlquilerPorDia;
+
+            //que el usuario no tenga carnet vencido
+
+            var usuarioConCarnetVencido = await _context.Usuarios.AnyAsync(x => x.Id == dto.IdUsuario && x.FechaVencimientoCarnet < DateTime.Now);
+            
+            if (usuarioConCarnetVencido)
+            {
+                throw new Exception("el usuario tiene el carnet vencido");
+            }
+            //----------------------------------------
             var reserva = new Reserva
             {
                 IdUsuario = dto.IdUsuario,
                 IdVehiculo = dto.IdVehiculo,
                 FechaEntrada = dto.FechaEntrada,
                 FechaSalida = dto.FechaSalida,
-                Total = dto.Total,
-
+               Total = total,
             };
-
-            var usuarioRepetido = await _context.Reservas.AnyAsync(x => x.IdUsuario == dto.IdUsuario);
-            if (usuarioRepetido)
-            {
-                throw new Exception($"Ya existe usuario para esa reserva {dto.IdVehiculo}");
-            }
-
-            var vehiculoRepetido = await _context.Reservas.AnyAsync(x => x.IdVehiculo == dto.IdVehiculo);
-            if (vehiculoRepetido)
-            {
-                throw new Exception($"Ya existe una reserva con ese vehiculo {dto.IdVehiculo}");
-            }
-
 
             await _context.AddAsync(reserva);
             await _context.SaveChangesAsync();
@@ -83,7 +126,6 @@ namespace Alquiler_Autos.Controlador
                 IdVehiculo = dto.IdVehiculo,
                 FechaEntrada = dto.FechaEntrada,
                 FechaSalida = dto.FechaSalida,
-                Total = dto.Total,
             };
 
         }
@@ -95,7 +137,7 @@ namespace Alquiler_Autos.Controlador
             reserva.IdVehiculo = dto.IdVehiculo;
             reserva.FechaEntrada = dto.FechaEntrada;
             reserva.FechaSalida = dto.FechaSalida;
-            reserva.Total = dto.Total;
+           
 
             _context.Update(reserva);
             await _context.SaveChangesAsync();
@@ -139,4 +181,4 @@ namespace Alquiler_Autos.Controlador
         }
 
     }
-}    
+}
